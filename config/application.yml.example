@@ -1,0 +1,51 @@
+micronaut:
+  application:
+    name: ruby
+
+  ssl:
+    build-self-signed: false
+    enabled: false
+
+  server:
+    netty:
+      access-logger:
+        enabled: true
+
+  metrics:
+    enabled: false
+    export:
+      influx:
+        enabled: false
+        descriptions: true
+        step: PT5S
+        uri: http://localhost:8086
+        db: nico_yazawa
+
+  security:
+    enabled: false
+    basic-auth:
+      enabled: true
+      credentials:
+        username:
+        password:
+
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/nico_yazawa
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 'password'
+    dialect: POSTGRES
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        bytecode:
+          provider: none
+
+flyway:
+  datasources:
+    default:
+      enabled: true
