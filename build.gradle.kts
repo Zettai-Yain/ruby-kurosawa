@@ -39,6 +39,7 @@ dependencies {
 
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut:micronaut-validation")
 
@@ -56,7 +57,6 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.sql:micronaut-hibernate-jpa")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
-    implementation("com.influxdb:influxdb-client-java:1.14.0")
 
     implementation("org.mongodb:mongodb-driver-sync:4.1.1")
 
