@@ -10,16 +10,24 @@ import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.enums.ParameterIn
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import java.util.*
 
+@Tag(name = "Activity", description = "Activity Controller")
 @Controller("/activity")
 @Secured(SecurityRule.IS_AUTHENTICATED)
 class UserActivityController(private val service: UserActivityService) {
 
     private val logger = LoggerFactory.getLogger(UserActivityController::class.java)
 
-    @Get("/{?limit,sort}")
+    @Get("/{?limit,sort}", produces = [MediaType.APPLICATION_JSON])
     fun getAll(
         @QueryValue limit: Optional<Int>,
         @QueryValue sort: Optional<Sort.Order.Direction>
