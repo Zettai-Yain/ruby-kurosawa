@@ -37,9 +37,10 @@ noArg {
 }
 
 dependencies {
+    kapt("io.micronaut:micronaut-inject-java")
+    kapt("io.micronaut.openapi:micronaut-openapi")
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut.security:micronaut-security-annotations")
-    kapt("io.micronaut.openapi:micronaut-openapi")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
