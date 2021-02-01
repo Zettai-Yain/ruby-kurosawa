@@ -89,6 +89,7 @@ tasks {
     dockerBuild {
         images.empty()
         images.add("nico_yazawa/${project.name}:${project.version}")
+        images.add("nico_yazawa/${project.name}")
     }
 
 }
