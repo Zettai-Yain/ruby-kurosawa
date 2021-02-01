@@ -87,7 +87,8 @@ tasks {
     }
 
     dockerBuild {
-        imageId.set("nico_yazawa/${project.name}")
+        images.empty()
+        images.add("nico_yazawa/${project.name}:${project.version}")
     }
 
 }
