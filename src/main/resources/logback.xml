@@ -14,7 +14,7 @@
         <append>true</append>
         <file>logs/ruby.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/ruby-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/ruby-%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
 
@@ -27,7 +27,7 @@
         <append>true</append>
         <file>logs/ruby-access.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/ruby-access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/ruby-access-%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
 
