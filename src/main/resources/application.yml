@@ -13,6 +13,9 @@ micronaut:
 
   metrics:
     enabled: true
+    export:
+      influx:
+        enabled: false
 
   security:
     enabled: false
