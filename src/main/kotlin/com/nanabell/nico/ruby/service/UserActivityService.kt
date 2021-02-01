@@ -29,28 +29,28 @@ class UserActivityService(
         return repository.findAll(limit.coerceAtLeast(0), direction).groupBy { it.id }.map { UserActivity(it.value) }
     }
 
-    fun setScore(id: Long, request: UserActivityRequest): UserActivityEntity {
+    fun setScore(id: Long, request: UserActivityRequest): UserActivity {
         val activity = getOrCreate(id, request.source)
 
         val change = getChange(activity, request.score, ChangeType.SET)
         logger.info("Setting ${request.source} Score of User $id to ${request.score}")
-        return persist(activity, change, request.source)
+        return persist(activity, change, request.source).let { find(id)!! }
     }
 
-    fun add(id: Long, request: UserActivityRequest): UserActivityEntity {
+    fun add(id: Long, request: UserActivityRequest): UserActivity {
         val activity = getOrCreate(id, request.source)
 
         val change = getChange(activity, request.score, ChangeType.ADD)
         logger.info("Adding ${request.score} to ${request.source} Score of User $id")
-        return persist(activity, change, request.source)
+        return persist(activity, change, request.source).let { find(id)!! }
     }
 
-    fun remove(id: Long, request: UserActivityRequest): UserActivityEntity {
+    fun remove(id: Long, request: UserActivityRequest): UserActivity {
         val activity = getOrCreate(id, request.source)
 
         val change = getChange(activity, request.score, ChangeType.REMOVE)
         logger.info("Removing ${request.score} to ${request.source} Score of User $id")
-        return persist(activity, change, request.source)
+        return persist(activity, change, request.source).let { find(id)!! }
     }
 
     fun delete(id: Long, source: String?) {
