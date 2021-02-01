@@ -7,13 +7,13 @@ object Application  {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val builder =build()
+        val builder = build()
             .args(*args)
             .packages("com.nanabell.nico.db")
             .defaultEnvironments("prod")
 
         if (isDevEnv())
-            builder.environments("prod")
+            builder.environments("dev")
 
         builder.start()
     }
@@ -22,7 +22,8 @@ object Application  {
         for (inputArgument in ManagementFactory.getRuntimeMXBean().inputArguments) {
             if (inputArgument.startsWith("-javaagent")
                 || inputArgument.startsWith("-agentpath")
-                || inputArgument.startsWith("agentlib"))
+                || inputArgument.startsWith("-agentlib")
+            )
                 return true
         }
 
