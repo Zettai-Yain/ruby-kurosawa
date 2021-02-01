@@ -8,7 +8,7 @@ data class UserActivity(
     constructor(entities: List<UserActivityEntity>) : this(
         entities.first().id,
         entities.sumOf { it.score },
-        entities.associate { it.source to it.score }
+        entities.sortedBy { it.source }.associate { it.source to it.score }
     )
 }
 
