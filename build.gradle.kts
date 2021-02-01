@@ -86,4 +86,8 @@ tasks {
         }
     }
 
+    dockerBuild {
+        imageId.set("nico_yazawa/${project.name}")
+    }
+
 }
