@@ -26,6 +26,12 @@ micronaut {
     }
 }
 
+kapt {
+    arguments {
+        arg("micronaut.openapi.views.spec", "swagger-ui.enabled=true,swagger-ui.theme=flattop")
+    }
+}
+
 noArg {
     annotation("com.nanabell.nico.ruby.annotation.NoArgConstructor")
 }
@@ -33,6 +39,7 @@ noArg {
 dependencies {
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut.security:micronaut-security-annotations")
+    kapt("io.micronaut.openapi:micronaut-openapi")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
@@ -58,6 +65,7 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-hibernate-jpa")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
 
+    implementation("io.swagger.core.v3:swagger-annotations")
     implementation("org.mongodb:mongodb-driver-sync:4.1.1")
 
     runtimeOnly("org.postgresql:postgresql")

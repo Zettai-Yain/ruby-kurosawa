@@ -1,9 +1,18 @@
 package com.nanabell.nico.ruby
 
 import io.micronaut.runtime.Micronaut.build
+import io.swagger.v3.oas.annotations.OpenAPIDefinition
+import io.swagger.v3.oas.annotations.info.Info
 import java.lang.management.ManagementFactory
 
-object Application  {
+@OpenAPIDefinition(
+    info = Info(
+        title = "Nico Yazawa Ruby",
+        version = "1.0.0",
+        description = "Ruby backend for Nico Yazawa"
+    )
+)
+object Application {
 
     @JvmStatic
     fun main(args: Array<String>) {
