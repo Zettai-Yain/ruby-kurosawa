@@ -13,8 +13,5 @@ out/
 .classpath
 .factorypath
 
-config/*
-!config/application.yml.example
-
 logs
-application*.yml
+application-*.yml
