@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "activity_score_log")
 
-data class ActivityScoreLog(
+data class ActivityScoreLogEntity(
 
     @Id
     @Column(name = "seq")

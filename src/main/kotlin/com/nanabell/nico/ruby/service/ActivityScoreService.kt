@@ -2,7 +2,7 @@ package com.nanabell.nico.ruby.service
 
 import com.nanabell.nico.ruby.domain.ActivityScore
 import com.nanabell.nico.ruby.domain.ActivityScoreEntity
-import com.nanabell.nico.ruby.domain.ActivityScoreLog
+import com.nanabell.nico.ruby.domain.ActivityScoreLogEntity
 import com.nanabell.nico.ruby.domain.ActivityScoreRequest
 import com.nanabell.nico.ruby.repository.ActivityScoreLogRepository
 import com.nanabell.nico.ruby.repository.ActivityScoreRepository
@@ -90,7 +90,7 @@ class ActivityScoreService(
     private fun persist(activityScoreEntity: ActivityScoreEntity, change: Long, source: String): ActivityScoreEntity {
         registry.summary("user.activity", "source", source, "id", "${activityScoreEntity.id}").record(change.toDouble())
 
-        logRepository.save(ActivityScoreLog(activityScoreEntity, change))
+        logRepository.save(ActivityScoreLogEntity(activityScoreEntity, change))
         return if (activityScoreEntity.new) repository.save(activityScoreEntity) else repository.update(activityScoreEntity)
     }
 
