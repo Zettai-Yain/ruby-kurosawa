@@ -6,9 +6,9 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "user_activity")
-@IdClass(UserActivityEntity.UserActivityId::class)
-data class UserActivityEntity(
+@Table(name = "activity_user")
+@IdClass(ActivityUserEntity.UserActivityId::class)
+data class ActivityUserEntity(
 
     @Id
     @Column(name = "id")

@@ -5,9 +5,9 @@ import java.time.ZoneOffset
 import javax.persistence.*
 
 @Entity
-@Table(name = "user_activity_log")
+@Table(name = "activity_user_log")
 
-data class UserActivityLog(
+data class ActivityUserLog(
 
     @Id
     @Column(name = "seq")
@@ -27,5 +27,5 @@ data class UserActivityLog(
     var score: Long
 
 ) {
-    constructor(activity: UserActivityEntity, change: Long) : this(0, OffsetDateTime.now(ZoneOffset.UTC), activity.id, activity.source, change)
+    constructor(activityUser: ActivityUserEntity, change: Long) : this(0, OffsetDateTime.now(ZoneOffset.UTC), activityUser.id, activityUser.source, change)
 }

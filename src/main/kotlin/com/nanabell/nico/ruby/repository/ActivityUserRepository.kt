@@ -1,6 +1,6 @@
 package com.nanabell.nico.ruby.repository
 
-import com.nanabell.nico.ruby.domain.UserActivityEntity
+import com.nanabell.nico.ruby.domain.ActivityUserEntity
 import io.micronaut.context.annotation.Requires
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.Repository
@@ -14,20 +14,20 @@ import javax.transaction.Transactional
 @Repository
 @Transactional
 @Requires(notEnv = ["test"])
-abstract class UserActivityRepository(private val entityManager: EntityManager) :
-    JpaRepository<UserActivityEntity, UserActivityEntity.UserActivityId> {
+abstract class ActivityUserRepository(private val entityManager: EntityManager) :
+    JpaRepository<ActivityUserEntity, ActivityUserEntity.UserActivityId> {
 
-    @Query("SELECT entity FROM UserActivityEntity entity WHERE entity.id = :id", readOnly = true)
-    abstract fun findAllById(id: Long): List<UserActivityEntity>
+    @Query("SELECT entity FROM ActivityUserEntity entity WHERE entity.id = :id", readOnly = true)
+    abstract fun findAllById(id: Long): List<ActivityUserEntity>
 
-    @Query("SELECT entity FROM UserActivityEntity entity WHERE entity.id = :id AND entity.source = :source", readOnly = true)
-    abstract fun findByIdAndSource(id: Long, source: String): UserActivityEntity?
+    @Query("SELECT entity FROM ActivityUserEntity entity WHERE entity.id = :id AND entity.source = :source", readOnly = true)
+    abstract fun findByIdAndSource(id: Long, source: String): ActivityUserEntity?
 
-    fun findAll(limit: Int = 0, direction: Sort.Order.Direction? = null): List<UserActivityEntity> {
-        var query = "SELECT entity.id, entity.source, entity.score FROM user_activity entity"
+    fun findAll(limit: Int = 0, direction: Sort.Order.Direction? = null): List<ActivityUserEntity> {
+        var query = "SELECT entity.id, entity.source, entity.score FROM activity_user entity"
 
         if (limit > 0) {
-            query += " WHERE entity.id IN (SELECT id FROM user_activity GROUP BY id"
+            query += " WHERE entity.id IN (SELECT id FROM activity_user GROUP BY id"
 
             if (direction != null)
                 query += " ORDER BY SUM(score) $direction"
@@ -36,7 +36,7 @@ abstract class UserActivityRepository(private val entityManager: EntityManager) 
         }
 
         query += if (direction != null) {
-            " ORDER BY (SELECT sum(score) FROM user_activity WHERE id = entity.id GROUP BY id) $direction"
+            " ORDER BY (SELECT sum(score) FROM activity_user WHERE id = entity.id GROUP BY id) $direction"
         } else {
             " ORDER BY entity.id"
         }
@@ -48,10 +48,10 @@ abstract class UserActivityRepository(private val entityManager: EntityManager) 
             .setHint(QueryHints.HINT_READONLY, true)
             .resultList as List<Array<Any>>
 
-        val list = arrayListOf<UserActivityEntity>()
+        val list = arrayListOf<ActivityUserEntity>()
         for (row in rows) {
             list.add(
-                UserActivityEntity(
+                ActivityUserEntity(
                     (row[0] as BigInteger).toLong(),
                     row[1] as String,
                     (row[2] as BigInteger).toLong()
@@ -62,9 +62,9 @@ abstract class UserActivityRepository(private val entityManager: EntityManager) 
         return list
     }
 
-    @Query("DELETE FROM UserActivityEntity WHERE id = :id")
+    @Query("DELETE FROM ActivityUserEntity WHERE id = :id")
     abstract fun deleteById(id: Long)
 
-    @Query("DELETE FROM UserActivityEntity WHERE id = :id AND source = :source")
+    @Query("DELETE FROM ActivityUserEntity WHERE id = :id AND source = :source")
     abstract fun deleteByIdAndSource(id: Long, source: String)
 }
