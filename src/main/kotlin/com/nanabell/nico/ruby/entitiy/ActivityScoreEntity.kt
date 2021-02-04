@@ -1,4 +1,4 @@
-package com.nanabell.nico.ruby.domain
+package com.nanabell.nico.ruby.entitiy
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.nanabell.nico.ruby.annotation.NoArgConstructor

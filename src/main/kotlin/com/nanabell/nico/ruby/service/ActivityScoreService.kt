@@ -1,8 +1,8 @@
 package com.nanabell.nico.ruby.service
 
 import com.nanabell.nico.ruby.domain.ActivityScore
-import com.nanabell.nico.ruby.domain.ActivityScoreEntity
-import com.nanabell.nico.ruby.domain.ActivityScoreLogEntity
+import com.nanabell.nico.ruby.entitiy.ActivityScoreEntity
+import com.nanabell.nico.ruby.entitiy.ActivityScoreLogEntity
 import com.nanabell.nico.ruby.domain.ActivityScoreRequest
 import com.nanabell.nico.ruby.repository.ActivityScoreLogRepository
 import com.nanabell.nico.ruby.repository.ActivityScoreRepository

@@ -1,6 +1,6 @@
 package com.nanabell.nico.ruby.repository
 
-import com.nanabell.nico.ruby.domain.ActivityScoreEntity
+import com.nanabell.nico.ruby.entitiy.ActivityScoreEntity
 import io.micronaut.context.annotation.Requires
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.Repository

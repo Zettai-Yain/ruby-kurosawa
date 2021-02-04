@@ -1,5 +1,7 @@
 package com.nanabell.nico.ruby.domain
 
+import com.nanabell.nico.ruby.entitiy.ActivityScoreEntity
+
 data class ActivityScore(
     val id: Long,
     val score: Long,

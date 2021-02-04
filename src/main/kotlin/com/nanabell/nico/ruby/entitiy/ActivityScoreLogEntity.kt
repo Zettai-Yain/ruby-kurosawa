@@ -1,4 +1,4 @@
-package com.nanabell.nico.ruby.domain
+package com.nanabell.nico.ruby.entitiy
 
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
