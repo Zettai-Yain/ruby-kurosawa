@@ -1,13 +1,13 @@
 package com.nanabell.nico.ruby.repository
 
-import com.nanabell.nico.ruby.domain.ActivityUserLog
+import com.nanabell.nico.ruby.domain.ActivityScoreLog
 import io.micronaut.context.annotation.Requires
+import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
 import javax.transaction.Transactional
 
-@Transactional
+@Repository
 @Requires(notEnv = ["test"])
-@JdbcRepository(dialect = Dialect.POSTGRES)
-interface ActivityUserLogRepository : CrudRepository<ActivityUserLog, Long>
+interface ActivityScoreLogRepository : CrudRepository<ActivityScoreLog, Long>

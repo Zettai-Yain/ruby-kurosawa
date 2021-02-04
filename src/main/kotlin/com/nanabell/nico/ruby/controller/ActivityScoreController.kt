@@ -1,9 +1,9 @@
 package com.nanabell.nico.ruby.controller
 
-import com.nanabell.nico.ruby.domain.UserActivity
-import com.nanabell.nico.ruby.domain.ActivityUserDeleteRequest
-import com.nanabell.nico.ruby.domain.ActivityUserRequest
-import com.nanabell.nico.ruby.service.ActivityUserService
+import com.nanabell.nico.ruby.domain.ActivityScore
+import com.nanabell.nico.ruby.domain.ActivityScoreDeleteRequest
+import com.nanabell.nico.ruby.domain.ActivityScoreRequest
+import com.nanabell.nico.ruby.service.ActivityScoreService
 import io.micronaut.data.model.Sort
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
@@ -14,23 +14,23 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import java.util.*
 
-@Tag(name = "Activity", description = "Activity Controller")
-@Controller("/activity")
+@Tag(name = "Activity", description = "Activity Score Controller")
+@Controller("/activity/score")
 @Secured(SecurityRule.IS_AUTHENTICATED)
-class ActivityUserController(private val service: ActivityUserService) {
+class ActivityScoreController(private val service: ActivityScoreService) {
 
-    private val logger = LoggerFactory.getLogger(ActivityUserController::class.java)
+    private val logger = LoggerFactory.getLogger(ActivityScoreController::class.java)
 
     @Get("/{?limit,sort}", produces = [MediaType.APPLICATION_JSON])
     fun getAll(
         @QueryValue limit: Optional<Int>,
         @QueryValue sort: Optional<Sort.Order.Direction>
-    ): HttpResponse<List<UserActivity>> {
+    ): HttpResponse<List<ActivityScore>> {
         return HttpResponse.ok(service.findAll(limit.orElse(0), sort.orElse(null)))
     }
 
     @Get("/{id}", processes = [MediaType.APPLICATION_JSON])
-    fun get(id: Long): HttpResponse<UserActivity> {
+    fun get(id: Long): HttpResponse<ActivityScore> {
         val activity = service.find(id)
         if (activity == null) {
             logger.warn("Attempted to retrieve Activity for non existing User: $id")
@@ -41,22 +41,22 @@ class ActivityUserController(private val service: ActivityUserService) {
     }
 
     @Put("/{id}/set", processes = [MediaType.APPLICATION_JSON])
-    fun set(id: Long, @Body request: ActivityUserRequest): HttpResponse<UserActivity> {
+    fun set(id: Long, @Body request: ActivityScoreRequest): HttpResponse<ActivityScore> {
         return HttpResponse.ok(service.setScore(id, request))
     }
 
     @Put("/{id}/add", processes = [MediaType.APPLICATION_JSON])
-    fun add(id: Long, @Body request: ActivityUserRequest): HttpResponse<UserActivity> {
+    fun add(id: Long, @Body request: ActivityScoreRequest): HttpResponse<ActivityScore> {
         return HttpResponse.ok(service.add(id, request))
     }
 
     @Put("/{id}/remove", processes = [MediaType.APPLICATION_JSON])
-    fun remove(id: Long, @Body request: ActivityUserRequest): HttpResponse<UserActivity> {
+    fun remove(id: Long, @Body request: ActivityScoreRequest): HttpResponse<ActivityScore> {
         return HttpResponse.ok(service.remove(id, request))
     }
 
     @Delete("/{id}", consumes = [MediaType.APPLICATION_JSON])
-    fun delete(id: Long, @Body request: ActivityUserDeleteRequest?): HttpResponse<Any> {
+    fun delete(id: Long, @Body request: ActivityScoreDeleteRequest?): HttpResponse<Any> {
         val activity = service.find(id)
         if (activity == null) {
             logger.warn("Attempted to delete Activity for non existing User: $id")

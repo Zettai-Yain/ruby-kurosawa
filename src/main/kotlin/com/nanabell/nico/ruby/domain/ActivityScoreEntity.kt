@@ -6,9 +6,9 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "activity_user")
-@IdClass(ActivityUserEntity.UserActivityId::class)
-data class ActivityUserEntity(
+@Table(name = "activity_score")
+@IdClass(ActivityScoreEntity.ActivityScoreId::class)
+data class ActivityScoreEntity(
 
     @Id
     @Column(name = "id")
@@ -26,7 +26,7 @@ data class ActivityUserEntity(
     var new: Boolean = false
 ) {
     @NoArgConstructor
-    data class UserActivityId(
+    data class ActivityScoreId(
         var id: Long,
         var source: String,
     ) : Serializable
