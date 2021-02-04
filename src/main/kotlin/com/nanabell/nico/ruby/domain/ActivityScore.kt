@@ -13,13 +13,3 @@ data class ActivityScore(
         entities.sortedBy { it.source }.associate { it.source to it.score }
     )
 }
-
-data class ActivityScoreRequest(
-    val score: Long,
-    val source: String
-)
-
-data class ActivityScoreDeleteRequest(
-    val source: String
-)
-
