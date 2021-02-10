@@ -1,23 +1,28 @@
 package com.nanabell.nico.ruby.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.nanabell.nico.ruby.entitiy.ActivityConfigEntity
-import io.micronaut.core.annotation.Introspected
-import io.micronaut.validation.Validated
-import javax.validation.Valid
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotNull
+import org.hibernate.Hibernate
 
-data class ActivityConfig(
+data class ActivityConfig(@JsonIgnore private val self: ActivityConfigEntity) {
 
     @JsonProperty("id", required = true)
-    val id: Long,
+    val id: Long = self.id
 
     @JsonProperty("min_gain", required = false, defaultValue = "3")
-    var minGain: Int,
+    var minGain: Int = self.minGain
 
     @JsonProperty("max_gain", required = false, defaultValue = "5")
-    var maxGain: Int
-) {
-    constructor(entity: ActivityConfigEntity) : this(entity.id, entity.minGain, entity.maxGain)
+    var maxGain: Int = self.maxGain
+
+    val rankId: Int = self.rankId
+
+    fun entity(): ActivityConfigEntity {
+        self.minGain = minGain
+        self.maxGain = maxGain
+
+        return self
+    }
+
 }

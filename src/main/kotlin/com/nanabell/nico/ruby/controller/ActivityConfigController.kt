@@ -69,10 +69,4 @@ class ActivityConfigController(private val service: ActivityConfigService) {
         return HttpResponse.ok()
     }
 
-    @Error(ValidationException::class)
-    fun validationHandler(e: ValidationException): HttpResponse<JsonError> {
-        return HttpResponse.status<JsonError>(HttpStatus.CONFLICT).body(JsonError(e.message))
-    }
-
-
 }

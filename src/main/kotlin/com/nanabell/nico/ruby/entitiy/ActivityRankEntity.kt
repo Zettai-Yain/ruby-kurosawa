@@ -1,5 +1,6 @@
 package com.nanabell.nico.ruby.entitiy
 
+import com.nanabell.nico.ruby.domain.ActivityRank
 import javax.persistence.*
 
 @Entity
@@ -8,12 +9,11 @@ data class ActivityRankEntity(
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
 
-    @JoinColumn(name = "activity_rank_id")
-    @ManyToOne(targetEntity = ActivityConfigEntity::class)
-    val config: ActivityConfigEntity,
+    @Column(name = "activity_rank_id")
+    var rankId: Int,
 
     @Column(name = "role_id")
     var roleId: Long,
@@ -21,4 +21,6 @@ data class ActivityRankEntity(
     @Column(name = "score")
     var score: Long
 
-)
+) {
+    fun domain() = ActivityRank(this)
+}

@@ -28,16 +28,15 @@ class ActivityConfigService(
     fun create(config: ActivityConfig): ActivityConfig {
         validate(config)
 
-        return ActivityConfig(repository.save(ActivityConfigEntity(config)))
+        return ActivityConfig(repository.save(config.entity()))
     }
 
     fun patch(config: ActivityConfig, patch: ActivityConfigPatch): ActivityConfig {
-
         config.minGain = patch.minGain ?: config.minGain
         config.maxGain = patch.maxGain ?: config.maxGain
 
         validate(config)
-        return config
+        return repository.update(config.entity()).domain()
     }
 
     fun delete(config: ActivityConfig) {
