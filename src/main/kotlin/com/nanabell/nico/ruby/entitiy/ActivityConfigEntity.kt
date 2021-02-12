@@ -9,17 +9,14 @@ data class ActivityConfigEntity(
 
     @Id
     @Column(name = "id")
-    val id: Long,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Int,
 
     @Column(name = "min_gain")
     var minGain: Int = 3,
 
     @Column(name = "max_gain")
     var maxGain: Int = 5,
-
-    @Column(name = "activity_rank_id")
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    val rankId: Int
 
 ) {
     fun domain() = ActivityConfig(this)

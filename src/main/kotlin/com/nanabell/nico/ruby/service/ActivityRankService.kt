@@ -1,6 +1,5 @@
 package com.nanabell.nico.ruby.service
 
-import com.nanabell.nico.ruby.domain.ActivityConfig
 import com.nanabell.nico.ruby.domain.ActivityRank
 import com.nanabell.nico.ruby.domain.ActivityRankAdd
 import com.nanabell.nico.ruby.domain.ActivityRankPatch
@@ -20,21 +19,12 @@ class ActivityRankService(private val repository: ActivityRankRepository) {
         return repository.findById(id).orElse(null)?.domain()
     }
 
-    fun findAllGuild(): Map<Long, List<ActivityRank>> {
-        return repository.findAllByGuild().mapValues { it.value.map { entity -> entity.domain() } }
-    }
-
-    fun findGuild(guild: Long): List<ActivityRank> {
-        return repository.findByGuild(guild).map { it.domain() }
-    }
-
-    fun add(config: ActivityConfig, add: ActivityRankAdd): ActivityRank {
-        val ranks = findGuild(config.id)
-        if (ranks.any { it.roleId == add.roleId })
+    fun add(add: ActivityRankAdd): ActivityRank {
+        if (findAll().any { it.roleId == add.roleId })
             throw ValidationException("Role with the Id ${add.roleId} already present!")
 
         validate(add.roleId, add.score)
-        return repository.save(ActivityRankEntity(0, config.rankId, add.roleId, add.score)).domain()
+        return repository.save(ActivityRankEntity(0, add.roleId, add.score)).domain()
     }
 
     fun patch(rank: ActivityRank, patch: ActivityRankPatch): ActivityRank {

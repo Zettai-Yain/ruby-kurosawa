@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import java.util.*
 
-@Tag(name = "Activity", description = "Activity Score Controller")
+@Tag(name = "Activity Score")
 @Controller("/activity/score")
 @Secured(SecurityRule.IS_AUTHENTICATED)
 class ActivityScoreController(private val service: ActivityScoreService) {

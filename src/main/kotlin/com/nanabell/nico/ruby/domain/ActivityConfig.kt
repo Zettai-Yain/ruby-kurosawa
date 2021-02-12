@@ -7,16 +7,14 @@ import org.hibernate.Hibernate
 
 data class ActivityConfig(@JsonIgnore private val self: ActivityConfigEntity) {
 
-    @JsonProperty("id", required = true)
-    val id: Long = self.id
+    @JsonIgnore
+    val id: Int = self.id
 
-    @JsonProperty("min_gain", required = false, defaultValue = "3")
+    @JsonProperty("min_gain")
     var minGain: Int = self.minGain
 
-    @JsonProperty("max_gain", required = false, defaultValue = "5")
+    @JsonProperty("max_gain")
     var maxGain: Int = self.maxGain
-
-    val rankId: Int = self.rankId
 
     fun entity(): ActivityConfigEntity {
         self.minGain = minGain

@@ -6,7 +6,7 @@ import com.nanabell.nico.ruby.entitiy.ActivityRankEntity
 
 data class ActivityRank(@JsonIgnore private val self: ActivityRankEntity) {
 
-    @JsonProperty("id")
+    @JsonIgnore
     val id: Int = self.id
 
     @JsonProperty("role_id")

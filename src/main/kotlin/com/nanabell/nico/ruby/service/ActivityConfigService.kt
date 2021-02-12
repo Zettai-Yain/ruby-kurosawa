@@ -12,23 +12,13 @@ class ActivityConfigService(
     private val repository: ActivityConfigRepository
 ) {
 
-    fun findAll(): List<ActivityConfig> {
-        return repository.findAll().map { ActivityConfig(it) }
-    }
+    fun get(): ActivityConfig {
+        var entity = repository.findAll().firstOrNull()
+        if (entity == null) {
+            entity = repository.save(ActivityConfigEntity(0))
+        }
 
-    fun find(id: Long): ActivityConfig? {
-        val entity = repository.findById(id).orElse(null) ?: return null
         return ActivityConfig(entity)
-    }
-
-    fun exists(id: Long): Boolean {
-        return repository.existsById(id)
-    }
-
-    fun create(config: ActivityConfig): ActivityConfig {
-        validate(config)
-
-        return ActivityConfig(repository.save(config.entity()))
     }
 
     fun patch(config: ActivityConfig, patch: ActivityConfigPatch): ActivityConfig {
@@ -37,10 +27,6 @@ class ActivityConfigService(
 
         validate(config)
         return repository.update(config.entity()).domain()
-    }
-
-    fun delete(config: ActivityConfig) {
-        repository.deleteById(config.id)
     }
 
     private fun validate(config: ActivityConfig) {

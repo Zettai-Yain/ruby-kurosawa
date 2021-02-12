@@ -1,5 +1,6 @@
 package com.nanabell.nico.ruby.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class ActivityRankPatch(
@@ -11,5 +12,6 @@ data class ActivityRankPatch(
     var score: Long? = null
 
 ) {
+    @JsonIgnore
     fun isEmpty() = roleId == null && score == null
 }

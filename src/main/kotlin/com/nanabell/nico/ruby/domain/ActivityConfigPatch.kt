@@ -1,5 +1,6 @@
 package com.nanabell.nico.ruby.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.micronaut.core.annotation.Introspected
 import javax.annotation.Nullable
@@ -14,5 +15,6 @@ data class ActivityConfigPatch(
     var maxGain: Int? = null
 
 ) {
+    @JsonIgnore
     fun isEmpty() = minGain == null && maxGain == null
 }

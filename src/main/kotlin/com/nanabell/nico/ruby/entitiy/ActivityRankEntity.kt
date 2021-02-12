@@ -12,9 +12,6 @@ data class ActivityRankEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
 
-    @Column(name = "activity_rank_id")
-    var rankId: Int,
-
     @Column(name = "role_id")
     var roleId: Long,
 
