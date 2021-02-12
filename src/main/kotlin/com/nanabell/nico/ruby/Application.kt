@@ -8,7 +8,7 @@ import java.lang.management.ManagementFactory
 @OpenAPIDefinition(
     info = Info(
         title = "Nico Yazawa Ruby",
-        version = "1.0.0",
+        version = "1.1.0",
         description = "Ruby backend for Nico Yazawa"
     )
 )
