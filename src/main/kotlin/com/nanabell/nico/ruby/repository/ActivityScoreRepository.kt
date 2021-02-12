@@ -13,7 +13,6 @@ import javax.transaction.Transactional
 
 @Repository
 @Transactional
-@Requires(notEnv = ["test"])
 abstract class ActivityScoreRepository(private val entityManager: EntityManager) : JpaRepository<ActivityScoreEntity, ActivityScoreEntity.ActivityScoreId> {
 
     @Query("SELECT entity FROM ActivityScoreEntity entity WHERE entity.id = :id", readOnly = true)

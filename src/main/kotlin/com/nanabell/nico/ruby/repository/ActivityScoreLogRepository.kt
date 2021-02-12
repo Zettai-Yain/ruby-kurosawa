@@ -6,5 +6,4 @@ import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.CrudRepository
 
 @Repository
-@Requires(notEnv = ["test"])
 interface ActivityScoreLogRepository : CrudRepository<ActivityScoreLogEntity, Long>
