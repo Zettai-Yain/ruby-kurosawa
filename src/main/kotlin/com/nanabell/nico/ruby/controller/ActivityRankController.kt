@@ -41,7 +41,7 @@ class ActivityRankController(private val service: ActivityRankService) {
     fun update(id: Int, @Body patch: ActivityRankPatch): HttpResponse<ActivityRank> {
         val rank = service.find(id)
         if (rank == null) {
-            logger.warn("Received ActivityRank GET Request for unknown id: $id")
+            logger.warn("Received ActivityRank PATCH Request for unknown id: $id")
             return HttpResponse.notFound()
         }
 
@@ -52,7 +52,7 @@ class ActivityRankController(private val service: ActivityRankService) {
     fun delete(id: Int): HttpResponse<Void> {
         val rank = service.find(id)
         if (rank == null) {
-            logger.warn("Received ActivityRank GET Request for unknown id: $id")
+            logger.warn("Received ActivityRank DELETE Request for unknown id: $id")
             return HttpResponse.notFound()
         }
 
