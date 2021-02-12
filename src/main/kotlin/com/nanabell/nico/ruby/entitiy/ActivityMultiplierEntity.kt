@@ -7,7 +7,7 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "activity_multipler")
+@Table(name = "activity_multiplier")
 @IdClass(ActivityMultiplierEntity.ActivityMultiplierId::class)
 data class ActivityMultiplierEntity(
 
