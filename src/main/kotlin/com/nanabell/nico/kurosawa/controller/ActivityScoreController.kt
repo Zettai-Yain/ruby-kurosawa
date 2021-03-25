@@ -8,15 +8,12 @@ import io.micronaut.data.model.Sort
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
-import io.micronaut.security.annotation.Secured
-import io.micronaut.security.rules.SecurityRule
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.LoggerFactory
 import java.util.*
 
 @Tag(name = "Activity Score")
 @Controller("/activity/score")
-@Secured(SecurityRule.IS_AUTHENTICATED)
 class ActivityScoreController(private val service: ActivityScoreService) {
 
     private val logger = LoggerFactory.getLogger(ActivityScoreController::class.java)

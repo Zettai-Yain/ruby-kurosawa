@@ -2,34 +2,11 @@ micronaut:
   application:
     name: ruby
 
-  ssl:
-    enabled: false
-    build-self-signed: true
-
-  server:
-    netty:
-      access-logger:
-        enabled: true
-
   metrics:
     enabled: true
     export:
       influx:
         enabled: false
-
-  security:
-    enabled: false
-    basic-auth:
-      enabled: true
-      credentials:
-        username: test
-        password: test123
-
-    intercept-url-map:
-      - pattern: /swagger/**
-        access: ["isAnonymous()"]
-      - pattern: /swagger-ui/**
-        access: ["isAnonymous()"]
 
   router:
     static-resources:

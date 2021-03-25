@@ -40,7 +40,6 @@ dependencies {
     kapt("io.micronaut:micronaut-inject-java")
     kapt("io.micronaut.openapi:micronaut-openapi")
     kapt("io.micronaut.data:micronaut-data-processor")
-    kapt("io.micronaut.security:micronaut-security-annotations")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
@@ -51,12 +50,8 @@ dependencies {
 
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut:micronaut-validation")
-
     implementation("io.micronaut:micronaut-http-client")
     implementation("javax.annotation:javax.annotation-api")
-    implementation("io.micronaut.security:micronaut-security")
-    implementation("io.micronaut.cache:micronaut-cache-caffeine")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
 
     implementation("io.micronaut.micrometer:micronaut-micrometer-core")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-influx")
@@ -68,7 +63,6 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
 
     implementation("io.swagger.core.v3:swagger-annotations")
-    implementation("org.mongodb:mongodb-driver-sync:4.1.1")
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("ch.qos.logback:logback-classic")
