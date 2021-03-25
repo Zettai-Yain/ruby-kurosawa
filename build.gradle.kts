@@ -8,7 +8,7 @@ plugins {
 }
 
 version = "1.1.0"
-group = "com.nanabell.nico.db"
+group = "com.nanabell.nico.kurosawa"
 
 val kotlinVersion = project.properties["kotlinVersion"]
 repositories {
@@ -22,7 +22,7 @@ micronaut {
 
     processing {
         incremental(true)
-        annotations("com.nanabell.nico.ruby.*")
+        annotations("com.nanabell.nico.kurosawa.*")
     }
 }
 
@@ -71,7 +71,7 @@ dependencies {
 
 
 application {
-    mainClass.set("com.nanabell.nico.ruby.Application")
+    mainClass.set("com.nanabell.nico.kurosawa.Application")
 }
 
 java {

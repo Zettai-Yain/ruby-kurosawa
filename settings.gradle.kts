@@ -1,1 +1,1 @@
-rootProject.name = "ruby"
+rootProject.name = "ruby-kurosawa"

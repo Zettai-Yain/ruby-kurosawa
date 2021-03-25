@@ -1,9 +1,9 @@
-package com.nanabell.nico.ruby.controller
+package com.nanabell.nico.kurosawa.controller
 
-import com.nanabell.nico.ruby.domain.ActivityScore
-import com.nanabell.nico.ruby.domain.ActivityScoreDeleteRequest
-import com.nanabell.nico.ruby.domain.ActivityScoreRequest
-import com.nanabell.nico.ruby.service.ActivityScoreService
+import com.nanabell.nico.kurosawa.domain.ActivityScore
+import com.nanabell.nico.kurosawa.domain.ActivityScoreDeleteRequest
+import com.nanabell.nico.kurosawa.domain.ActivityScoreRequest
+import com.nanabell.nico.kurosawa.service.ActivityScoreService
 import io.micronaut.data.model.Sort
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
