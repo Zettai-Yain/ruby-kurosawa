@@ -1,10 +1,10 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.4.21"
-    id("org.jetbrains.kotlin.kapt") version "1.4.21"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.21"
-    id("org.jetbrains.kotlin.plugin.jpa") version "1.4.21"
+    id("org.jetbrains.kotlin.jvm") version "1.4.31"
+    id("org.jetbrains.kotlin.kapt") version "1.4.31"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.31"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.4.31"
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    id("io.micronaut.application") version "1.3.2"
+    id("io.micronaut.application") version "1.3.4"
 }
 
 version = "1.1.0"
@@ -47,6 +47,7 @@ dependencies {
 
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
 
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut:micronaut-validation")
