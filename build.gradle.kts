@@ -14,6 +14,8 @@ val kotlinVersion = project.properties["kotlinVersion"]
 repositories {
     mavenCentral()
     jcenter()
+
+    maven("https://repo.spring.io/libs-snapshot")
 }
 
 micronaut {
@@ -55,6 +57,12 @@ dependencies {
 
     implementation("io.micronaut.micrometer:micronaut-micrometer-core")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-influx")
+    constraints {
+        implementation("io.micrometer:micrometer-core:1.7.0-M1")
+        implementation("io.micrometer:micrometer-registry-influx:1.7.0-M1") {
+            because("Required for Influx2.0 Support")
+        }
+    }
 
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.data:micronaut-data-jdbc")
