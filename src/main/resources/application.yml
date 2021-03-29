@@ -19,10 +19,10 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: ${postgres.url:`jdbc:postgresql://localhost:5432/ruby_kurosawa`}
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: 'password'
+    username: ${postgres.username:ruby_kurosawa}
+    password: ${postgres.password:ruby_kurosawa}
     dialect: POSTGRES
 
 jpa:
