@@ -33,7 +33,7 @@ kapt {
 }
 
 noArg {
-    annotation("com.nanabell.nico.ruby.annotation.NoArgConstructor")
+    annotation("com.nanabell.nico.kurosawa.annotation.NoArgConstructor")
 }
 
 dependencies {
