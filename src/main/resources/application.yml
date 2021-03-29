@@ -3,10 +3,14 @@ micronaut:
     name: Ruby Kurosawa
 
   metrics:
-    enabled: true
+    enabled: ${metrics.enabled:true}
     export:
       influx:
-        enabled: false
+        enabled: true
+        uri: ${influx.uri:`http://localhost:8086`}
+        org: ${influx.org:zettai-yain}
+        bucket: ${influx.bucket:ruby_kurosawa}
+        token: ${influx.token}
 
   router:
     static-resources:
