@@ -92,10 +92,20 @@ tasks {
             jvmTarget = "14"
         }
     }
+
     compileTestKotlin {
         kotlinOptions {
             jvmTarget = "14"
         }
+    }
+
+    jar {
+        exclude("application-*.yml")
+    }
+
+    shadowJar {
+        exclude("application-*.yml")
+        mergeServiceFiles()
     }
 
     dockerBuild {
