@@ -109,9 +109,13 @@ tasks {
     }
 
     dockerBuild {
-        images.empty()
-        images.add("nico_yazawa/${project.name}:${project.version}")
-        images.add("nico_yazawa/${project.name}")
+        dependsOn(buildLayers)
+
+        dockerFile.set(file("${project.projectDir}/Dockerfile"))
+        images.set(listOf(
+            "registry.zettai-yain.dev/${project.name}:${project.version}",
+            "registry.zettai-yain.dev/${project.name}"
+        ))
     }
 
 }
