@@ -1,10 +1,8 @@
 package com.nanabell.nico.kurosawa.service
 
 import com.nanabell.nico.kurosawa.domain.ActivityScore
-import com.nanabell.nico.kurosawa.entitiy.ActivityScoreEntity
-import com.nanabell.nico.kurosawa.entitiy.ActivityScoreLogEntity
 import com.nanabell.nico.kurosawa.domain.ActivityScoreRequest
-import com.nanabell.nico.kurosawa.repository.ActivityScoreLogRepository
+import com.nanabell.nico.kurosawa.entitiy.ActivityScoreEntity
 import com.nanabell.nico.kurosawa.repository.ActivityScoreRepository
 import io.micrometer.core.instrument.MeterRegistry
 import io.micronaut.data.model.Sort
@@ -14,7 +12,6 @@ import javax.inject.Singleton
 @Singleton
 class ActivityScoreService(
     private val repository: ActivityScoreRepository,
-    private val logRepository: ActivityScoreLogRepository,
     private val registry: MeterRegistry
 ) {
 
@@ -89,8 +86,6 @@ class ActivityScoreService(
 
     private fun persist(activityScoreEntity: ActivityScoreEntity, change: Long, source: String): ActivityScoreEntity {
         registry.summary("user.activity", "source", source, "id", "${activityScoreEntity.id}").record(change.toDouble())
-
-        logRepository.save(ActivityScoreLogEntity(activityScoreEntity, change))
         return if (activityScoreEntity.new) repository.save(activityScoreEntity) else repository.update(activityScoreEntity)
     }
 
