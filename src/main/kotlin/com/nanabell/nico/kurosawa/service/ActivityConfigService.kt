@@ -32,7 +32,6 @@ class ActivityConfigService(
     private fun validate(config: ActivityConfig) {
         if (config.minGain > config.maxGain) throw ValidationException("min_gain(${config.minGain}) cannot be larger than max_gain(${config.maxGain})!")
         if (config.minGain < 0) throw ValidationException("min_gain(${config.minGain}) cannot be less than 0!")
-        if (config.maxGain < 0) throw ValidationException("max_gain(${config.minGain}) cannot be less than 0!")
     }
 
 }
