@@ -28,26 +28,28 @@ class ActivityScoreService(
 
     fun setScore(id: Long, request: ActivityScoreRequest): ActivityScore {
         val activity = getOrCreate(id, request.source)
+        activity.score = request.score
 
-        val change = getChange(activity, request.score, ChangeType.SET)
         logger.info("Setting ${request.source} Score of User $id to ${request.score}")
-        return persist(activity, change, request.source).let { find(id)!! }
+        return persist(activity).let { find(id)!! }
     }
 
     fun add(id: Long, request: ActivityScoreRequest): ActivityScore {
         val activity = getOrCreate(id, request.source)
-
         val change = getChange(activity, request.score, ChangeType.ADD)
+
         logger.info("Adding ${request.score} to ${request.source} Score of User $id")
-        return persist(activity, change, request.source).let { find(id)!! }
+        registry.summary("user.activity.gain", "source", request.source, "id", "$id").record(change.toDouble())
+        return persist(activity).let { find(id)!! }
     }
 
     fun remove(id: Long, request: ActivityScoreRequest): ActivityScore {
         val activity = getOrCreate(id, request.source)
-
         val change = getChange(activity, request.score, ChangeType.REMOVE)
+
         logger.info("Removing ${request.score} to ${request.source} Score of User $id")
-        return persist(activity, change, request.source).let { find(id)!! }
+        registry.summary("user.activity.loss", "source", request.source, "id", "$id").record(change.toDouble())
+        return persist(activity).let { find(id)!! }
     }
 
     fun delete(id: Long, source: String?) {
@@ -60,33 +62,29 @@ class ActivityScoreService(
         }
     }
 
-    private fun getChange(activityScoreEntity: ActivityScoreEntity, change: Long, changeType: ChangeType): Long {
-        val original = activityScoreEntity.score
+    private fun getChange(entity: ActivityScoreEntity, change: Long, changeType: ChangeType): Long {
+        val original = entity.score
 
         return when (changeType) {
-            ChangeType.SET -> {
-                activityScoreEntity.score = change.coerceAtLeast(0)
-                activityScoreEntity.score - original
-            }
-
             ChangeType.ADD -> {
-                activityScoreEntity.score += change
-                activityScoreEntity.score - original
+                entity.score += change
+
+                entity.score - original // return
             }
 
             ChangeType.REMOVE -> {
-                activityScoreEntity.score -= change
-                activityScoreEntity.score = activityScoreEntity.score.coerceAtLeast(0)
+                entity.score -= change
+                entity.score = entity.score.coerceAtLeast(0)
 
-                activityScoreEntity.score - original
+                entity.score - original // return
             }
         }
     }
 
 
-    private fun persist(activityScoreEntity: ActivityScoreEntity, change: Long, source: String): ActivityScoreEntity {
-        registry.summary("user.activity", "source", source, "id", "${activityScoreEntity.id}").record(change.toDouble())
+    private fun persist(activityScoreEntity: ActivityScoreEntity): ActivityScoreEntity {
         return if (activityScoreEntity.new) repository.save(activityScoreEntity) else repository.update(activityScoreEntity)
+        // TODO: Atomic Database Updates!
     }
 
     private fun getOrCreate(id: Long, source: String): ActivityScoreEntity {
@@ -98,7 +96,6 @@ class ActivityScoreService(
     }
 
     private enum class ChangeType {
-        SET,
         ADD,
         REMOVE
     }
